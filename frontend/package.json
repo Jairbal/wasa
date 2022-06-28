@@ -1,0 +1,25 @@
+{
+  "name": "wasa-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "axios": "^0.27.2",
+    "cookies-next": "^2.0.5",
+    "luxon": "^2.4.0",
+    "next": "12.1.6",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-modal": "^3.15.1",
+    "react-phone-number-input": "^3.2.3"
+  },
+  "devDependencies": {
+    "eslint": "8.18.0",
+    "eslint-config-next": "12.1.6"
+  }
+}

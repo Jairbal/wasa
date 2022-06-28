@@ -1,0 +1,27 @@
+.head_newChat {
+    height: 109px;
+    background-color: #202c33;
+    padding: 0 20px 0 23px;
+    display: flex;
+    align-items: flex-end;
+}
+
+.head_content{
+    display: flex;
+    flex-direction: row;
+    height:59px;
+    align-items: center;
+    font-weight: 500;
+    font-size: 19px;
+    color: #d9dee0;
+}
+
+.head_back {
+    background-color: transparent;
+    border: 0;
+    outline: none;
+    cursor: pointer;
+    margin-right: 28px;
+    padding-top: 2px;
+}
+

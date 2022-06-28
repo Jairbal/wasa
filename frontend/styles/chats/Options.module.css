@@ -1,0 +1,38 @@
+.options {
+    top: 50px;
+    position: absolute;
+    color: #aebac1;
+    z-index: 2;
+    right: 25px;
+}
+
+.options_list {
+    background-color: #202c33;
+    list-style: none;
+    width: 100%;
+    width: 218px;
+    height: 218px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 9px 0;
+    border-radius: 3px;
+    box-shadow: 0 2px 5px 0 rgb(11,20,26, .26), 0 2px 10px 0 rgb(11,20,26, .16);
+}
+
+.options_list li {
+    display: flex;
+    align-items: center;
+    padding-right: 58px;
+    padding-left: 24px;
+    cursor: pointer;
+    height:100%;
+    white-space: nowrap;
+    font-size: 14.5px;
+    line-height: 14.5px;
+}
+
+.options_list li:hover {
+    background-color: #111b21;
+    cursor: pointer;
+}

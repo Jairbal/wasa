@@ -1,0 +1,41 @@
+.messages_head {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 59px;
+    padding: 10px 16px;
+    background-color: #202c33;
+    border-left: 1px solid rgba(134, 150, 160, 0.15);
+}
+
+.messages_head_options {
+    padding: 8px;
+    color: #aebac1;
+    position: relative;
+    cursor: pointer;
+}
+
+.messages_head_info {
+    margin-left: 15px;
+}
+
+.messages_head_name {
+    font: inherit;
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 21px;
+}
+
+.messages_head_connection {
+    font-size: 13px;
+    color: #8696a0;
+}
+
+.messages_display {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-grow: 1;
+    cursor: pointer;
+}

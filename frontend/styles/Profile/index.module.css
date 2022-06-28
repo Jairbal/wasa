@@ -1,0 +1,57 @@
+.profile {
+    position: absolute;
+    z-index: 100;
+    height: 100%;
+    width: 100%;
+}
+
+.info {
+    background-color: #111b21;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.info_photo {
+    margin: 28px auto;
+    display: flex;
+    justify-content: center;
+}
+
+.info_state,
+.info_username {
+    padding: 14px 30px 20px 30px;
+    color: #008069;
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.info_edit_username {
+    margin-top: 25px;
+    display: flex;
+    flex-direction: row;
+    color: #8696a0;
+    justify-content: space-between;
+}
+
+.info_edit_username p{
+    color: #d1d7db;
+}
+
+.info_info{
+    padding: 14px 30px 20px 30px;
+    color: #8696a0;
+    font-size: 14px;
+}
+
+.info_edit_state {
+    margin-top: 25px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 17px;
+    color: #8696a0;
+}
+
+.info_edit_state p {
+    color: #d1d7db;
+}

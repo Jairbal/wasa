@@ -1,0 +1,54 @@
+.chat {
+    height: 72px;
+    background-color: #111b21;
+    display: flex;
+    flex-direction: row;
+    cursor: pointer;
+}
+
+.chat:hover{
+    background-color: #202c33;
+}
+
+.chat_photo {
+    padding: 12px 15px 12px 13px;
+}
+
+.chat_body {
+    border-bottom: 1px solid rgba(134, 150, 160, 0.15);
+    display: flex;
+    flex-direction: column;
+    padding: 14px 15px 14px 0px;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+.chat_body_head {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-grow: 1;
+    justify-content: space-between;
+}
+
+.chat_head_name {
+    font: inherit;
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 21px;
+}
+
+.chat_head_hour {
+    font-size: 12px;
+    color: #8696a0;
+}
+
+.chat_body_message {
+    color: #8696a0;
+    font-size: 14px;
+}
+
+.contact_state {
+    font-size:13px;
+    color: #8696a0;
+}

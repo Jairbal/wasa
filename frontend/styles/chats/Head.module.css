@@ -1,0 +1,39 @@
+  
+  .chats_head{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 59px;
+    padding: 10px 16px;
+    position: relative;
+  }
+  
+  .chats_head_photo{
+    cursor: pointer;
+  }
+
+  .chats_head_options{
+    height:100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 150px;
+  }
+  
+  .chats_head_option{
+    color: #aebac1;
+    position: relative;
+    cursor: pointer;
+    border-radius: 100%;
+    width:40px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .chats_head_option_active{
+    background-color: hsla(0,0%,100%,0.1);
+  }
+  

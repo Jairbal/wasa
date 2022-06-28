@@ -1,0 +1,14 @@
+.addPhone {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.addPhone_send {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    padding: 0 12px;
+    color: #aebac1;
+    position: relative;
+}
