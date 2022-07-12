@@ -11,6 +11,20 @@
     overflow-y: auto;
 }
 
+.info_icons{
+    display: flex;
+    flex-direction: row;
+    cursor: pointer;
+}
+
+.info_icon_smiley{
+    margin-right: 3px;
+}
+
+.info_icon_edit {
+    cursor: pointer;
+}
+
 .info_photo {
     margin: 28px auto;
     display: flex;
@@ -21,7 +35,6 @@
 .info_username {
     padding: 14px 30px 20px 30px;
     color: #008069;
-    font-size: 15px;
     font-weight: 400;
 }
 
@@ -33,8 +46,17 @@
     justify-content: space-between;
 }
 
-.info_edit_username p{
+.info_edit_active{
+    border-bottom: 2px solid #00a884;
+}
+
+.info_edit_input{
+    background-color: transparent;
+    border: none;
     color: #d1d7db;
+    font-size: 15px;
+    width: 100%;
+    outline:none;
 }
 
 .info_info{

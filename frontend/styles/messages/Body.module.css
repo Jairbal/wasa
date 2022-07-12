@@ -1,7 +1,0 @@
-.body_background{
-    display: flex;
-    flex-grow: 1;
-    background-color: #111B21;
-    background-image:url(../../public/bg-chat-tile-dark.png);
-    opacity: .06;
-}

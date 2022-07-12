@@ -12,7 +12,7 @@ const config = {
     googleClientId: process.env.GOOGLE_CLIENT_ID,
     googleClientSecret: process.env.GOOGLE_CLIENT_SECRET,
     authJwtSecret: process.env.AUTH_JWT_SECRET,
-    clientUrl: process.env.CLIENTURL
+    clientUrl: process.env.CLIENT_URL
 };
 
 module.exports = {config}

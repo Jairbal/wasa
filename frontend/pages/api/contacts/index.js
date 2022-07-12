@@ -12,7 +12,7 @@ export default async function contacts(req, res) {
           headers: { Authorization: `Bearer ${ws_fi}` },
           data: { contact },
         });
-        res.status(200).json(data);
+        res.status(201).json(data);
       } catch (err) {
         res.status(406).json(err.response.data);
       }

@@ -1,11 +1,15 @@
-import styles from "../../styles/Profile/index.module.css";
-import { useAppContext } from "../../context/AppContext";
 import Image from "next/image";
-import PencilSvg from "../svg/Pencil";
+import { useAppContext } from "../../context/AppContext";
+import styles from "../../styles/Profile/index.module.css";
+import { Input } from "./Input";
+
 
 export const Info = () => {
   const { state } = useAppContext();
   const { user } = state;
+
+  const handleChange = () => {};
+
   return (
     <div className={styles.info}>
       <div className={styles.info_photo}>
@@ -16,27 +20,24 @@ export const Info = () => {
           style={{ borderRadius: 100 }}
         />
       </div>
-      <div className={styles.info_username}>
-        <p>Tu nombre</p>
-        <div className={styles.info_edit_username}>
-          <p>{user.user_username}</p>
-          <span>
-            <PencilSvg />
-          </span>
-        </div>
-      </div>
+      <Input
+        label="Tu nombre"
+        name="username"
+        value={user.user_username}
+        onChange={handleChange}
+      />
       <div className={styles.info_info}>
-        <p>Este no es tu nombre de usuario ni un PIN. Este nombre será visible para tus contactos de wasa</p>
+        <p>
+          Este no es tu nombre de usuario ni un PIN. Este nombre será visible
+          para tus contactos de wasa
+        </p>
       </div>
-      <div className={styles.info_state}>
-        <p>Info.</p>
-        <div className={styles.info_edit_state}>
-          <p>{user.user_state}</p>
-          <span>
-            <PencilSvg />
-          </span>
-        </div>
-      </div>
+      <Input
+        label="Info."
+        name="stt"
+        value={user.user_state}
+        onChange={handleChange}
+      />
     </div>
   );
 };

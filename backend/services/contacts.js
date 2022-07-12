@@ -1,19 +1,24 @@
-const pool = require("../lib/mariadb");
-const { DateTime } = require("luxon");
+const { pool } = require("../lib/mariadb");
 
 class ContactsService {
   constructor() {
     this.table = "tb_contacts";
     this.table_users = "tb_users";
+    this.table_sockets = "tb_sockets";
     this.pool = pool;
   }
 
   async getAll({ cont_owner_user_id }) {
     let contacts = [];
-    const query = `SELECT c.cont_displayName, c.cont_user_id, c.cont_id, u.user_urlPhoto, u.user_state, u.user_phone, u.user_lastConnection FROM ${this.table} AS c, ${this.table_users} AS u WHERE c.cont_user_id = u.user_id AND c.cont_owner_user_id = ${cont_owner_user_id}`;
-    const conn = await this.pool.getConnection();
+    const query = `SELECT c.cont_displayName, c.cont_user_id, c.cont_id, u.user_urlPhoto, u.user_state, u.user_phone, u.user_lastConnection FROM ${
+      this.table
+    } AS c, ${
+      this.table_users
+    } AS u WHERE c.cont_user_id = u.user_id AND c.cont_owner_user_id = ${this.pool.escape(
+      cont_owner_user_id
+    )}`;
     try {
-      const result = await conn.query(query);
+      const result = await this.pool.query(query);
       result.forEach((fila) => {
         contacts.push(fila);
       });
@@ -27,41 +32,61 @@ class ContactsService {
         }
         return 0;
       });
-      conn.end();
       return contacts;
     } catch (err) {
       console.log(err);
-      conn.end();
     }
   }
 
   async getContact({ cont_id }) {
-    const query = `SELECT c.cont_displayName, c.cont_user_id, c.cont_id, u.user_urlPhoto, u.user_state, u.user_phone, u.user_lastConnection FROM ${this.table} AS c, ${this.table_users} AS u WHERE c.cont_user_id = u.user_id AND c.cont_id = ${cont_id}`;
+    const query = `SELECT c.cont_displayName, c.cont_user_id, c.cont_id, u.user_urlPhoto, u.user_state, u.user_phone, u.user_lastConnection FROM ${
+      this.table
+    } AS c, ${
+      this.table_users
+    } AS u WHERE c.cont_user_id = u.user_id AND c.cont_id = ${this.pool.escape(
+      cont_id
+    )}`;
 
-    const conn = await this.pool.getConnection();
     try {
-      const [contact] = await conn.query(query);
-      conn.end();
+      const [contact] = await this.pool.query(query);
       return contact;
     } catch (err) {
       console.log(err);
-      conn.end();
+    }
+  }
+
+  async getContactByuserId({ cont_user_id }) {
+    const query = `SELECT c.cont_displayName, c.cont_user_id, c.cont_id, u.user_urlPhoto, u.user_state, u.user_phone, u.user_lastConnection FROM ${
+      this.table
+    } AS c, ${
+      this.table_users
+    } AS u WHERE c.cont_user_id = u.user_id AND c.cont_user_id = ${this.pool.escape(
+      cont_user_id
+    )}`;
+    try {
+      const [contact] = await this.pool.query(query);
+      return contact;
+    } catch (err) {
+      console.log(err);
     }
   }
 
   async createContact({ contact }) {
     const { cont_displayName, cont_owner_user_id, cont_user_id } = contact;
-    const conn = await this.pool.getConnection();
     try {
-      const query = `INSERT INTO ${this.table} (cont_displayName, cont_owner_user_id, cont_user_id) VALUES ("${cont_displayName}", "${cont_owner_user_id}", "${cont_user_id}") RETURNING cont_id`;
-      const result = await conn.query(query);
+      const query = `INSERT INTO ${
+        this.table
+      } (cont_displayName, cont_owner_user_id, cont_user_id) VALUES (${this.pool.escape(
+        cont_displayName
+      )}, ${this.pool.escape(cont_owner_user_id)}, ${this.pool.escape(
+        cont_user_id
+      )}) RETURNING cont_id`;
+      const result = await this.pool.query(query);
       const { cont_id } = result[0];
       const contactCreated = await this.getContact({ cont_id });
-      conn.end();
       return contactCreated;
     } catch (err) {
       console.log(err);
-      conn.end();
     }
   }
 }

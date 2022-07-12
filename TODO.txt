@@ -1,0 +1,8 @@
+1. CREACION DE CHAT CUANDO EL DESTINATARIO NO ESTA EN LA LISTA DE CONTACTOS
+EL DISPLAYNAME DEL DESTINARIO SERA user_phone
+
+2. ORDENENAR LA LISTA DE CHATS EN EL BAKCEND
+
+3. detectar links en los mensajes y agregarles la etiqueta a
+
+4. Al enviar un mensaje actualizar el estado en el componente de chats izquierda

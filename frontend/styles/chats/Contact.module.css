@@ -6,7 +6,7 @@
     cursor: pointer;
 }
 
-.chat:hover{
+.chat:hover {
     background-color: #202c33;
 }
 
@@ -40,15 +40,47 @@
 
 .chat_head_hour {
     font-size: 12px;
-    color: #8696a0;
 }
 
 .chat_body_message {
-    color: #8696a0;
     font-size: 14px;
+    color: #8696a0;
+}
+
+.chat_color_gray {
+    color: #8696a0;
+}
+
+.chat_color_green {
+    color: #00a884;
 }
 
 .contact_state {
-    font-size:13px;
+    font-size: 13px;
     color: #8696a0;
+}
+
+.chat_content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-right: 3px;
+}
+
+.chat_content_message{
+    display: flex;
+    flex-direction: row;
+}
+
+.chat_content_notRead {
+    border-radius: 100%;
+    width: 20px;
+    height: 20px;
+    background-color: #00a884;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.75rem;
+    color: #111b21;
 }

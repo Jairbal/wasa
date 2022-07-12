@@ -34,7 +34,7 @@ export const AddUserPhone = () => {
           method: "PUT",
           data: { user: { ...user, user_phone }, user_id: user.user_id },
         });
-        dispatch({ type: "load_user", value: resp.data.user });
+        dispatch({ type: "update_user", value: resp.data.user });
         dispatch({
           type: "system_message",
           value: {

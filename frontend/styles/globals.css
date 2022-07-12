@@ -150,3 +150,26 @@ a {
 	background-color:#111b21;
   }
 /*Fin Estilos */
+
+/* Emoji Picker */
+
+em-emoji-picker {
+	--background-rgb: 35, 49, 56;
+	--border-radius: 4px;
+	--category-icon-size: 24px;
+	--color-border-hover: rgba(0, 0, 0, 0.1);
+	--color-border: rgba(0, 0, 0, 0.05);
+	--font-family: Segoe UI, Helvetica Neue, Helvetica, Lucida Grande, Arial, Ubuntu, Cantarell, Fira Sans, sans-serif;
+	--font-size: 20px;
+	--rgb-accent: 0, 168, 132;
+	--rgb-background: 35, 49, 56;
+	--rgb-color: 134, 150, 160;
+	--rgb-input: 255, 235, 235;
+	--shadow: 0 4px 20px 0 rgba(11,20,26,.1),0 8px 17px 0 rgba(11,20,26,.16);
+
+	height: 50vh;
+	min-height: 400px;
+	max-height: 800px;
+  }
+
+/* Fin Emoji Picker */

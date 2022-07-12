@@ -1,0 +1,9 @@
+.picker{
+    position: absolute;
+    z-index: 1000;
+}
+
+.icon{
+    cursor: pointer;
+    z-index: 100;
+}
