@@ -76,6 +76,7 @@ class ChatsServices {
       }
       const {messages, notRead} = await this.messagesService.getMessages({
         mess_chat_id: chat_id,
+        owner_user_id
       });
       return {
         chat,

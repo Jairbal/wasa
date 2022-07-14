@@ -129,6 +129,11 @@ export const AppReducer = (state, action) => {
               messages: [...chat.messages, action.value],
               notRead: chat.notRead + 1,
             };
+          } else if (chat.chat.chat_id == state.chatActive?.chat.chat_id) {
+            return {
+              ...chat,
+              messages: [...chat.messages, action.value],
+            }
           }
           return chat;
         }),
@@ -234,16 +239,18 @@ export const AppReducer = (state, action) => {
         ...state,
         attachImages: {
           ...state.attachImages,
-          images: state.attachImages.images.filter((image, index) => index !== action.value)
-        }
-      }
+          images: state.attachImages.images.filter(
+            (image, index) => index !== action.value
+          ),
+        },
+      };
     }
 
     case "Dittach_images": {
       return {
         ...state,
-        attachImages: null
-      }
+        attachImages: null,
+      };
     }
 
     case "change_option_active": {

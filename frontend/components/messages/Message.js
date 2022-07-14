@@ -1,13 +1,14 @@
 import { DateTime } from "luxon";
 import { useEffect, useState } from "react";
 import { useAppContext } from "../../context/AppContext";
+import { ulrApi } from "../../helpers";
 import { useElementObserver } from "../../hooks/useElementObserver";
 import styles from "../../styles/messages/index.module.css";
 import MsgDoubleCheck from "../svg/MsgDoubleCheck";
 import TailOutSvg from "../svg/TailOut";
 
-export const Message = ({ message, isFirst, notRead }) => {
-  const { state, dispatch } = useAppContext();
+export const Message = ({ message, isFirst }) => {
+  const { state } = useAppContext();
   const { user, socket } = state;
   const [hour, setHour] = useState("");
 
@@ -24,7 +25,11 @@ export const Message = ({ message, isFirst, notRead }) => {
   });
 
   useEffect(() => {
-    if (isVisible && message.mess_user_id_sent !== user.user_id && !message.mess_viewed) {
+    if (
+      isVisible &&
+      message.mess_user_id_sent !== user.user_id &&
+      !message.mess_viewed
+    ) {
       socket.emit("message:viewed", {
         mess_id: message.mess_id,
         mess_chat_id: message.mess_chat_id,
@@ -58,7 +63,22 @@ export const Message = ({ message, isFirst, notRead }) => {
           }`}
           ref={messageRef}
         >
-          <p className={styles.message_content_text}>{message.mess_message}</p>
+          {message.mess_isMedia && (
+            <div className={styles.message_content_media}>
+              <img
+                className={styles.message_content_media_img}
+                src={ulrApi + message.mess_urlMedia}
+              />
+              <div className={styles.message_content_text_shadow}></div>
+            </div>
+          )}
+          {message.mess_message.length > 0 && (
+            <div>
+              <p className={styles.message_content_text}>
+                {message.mess_message}
+              </p>
+            </div>
+          )}
           <div className={styles.message_content_metadata}>
             <p>{hour}</p>
             {isSent && (

@@ -12,7 +12,7 @@ import { InputMessage } from "./InputMessage";
 export const FooterMessages = () => {
   const { state, dispatch } = useAppContext();
   const { user, chatActive, socket, chats, optionActive } = state;
-  const [messageContent, setSmessageContent] = useState("");
+  const [messageContent, setMessageContent] = useState([]);
 
   const handleShowAttach = () => {
     if (optionActive === "attach") {
@@ -48,7 +48,7 @@ export const FooterMessages = () => {
           dispatch({ type: "set_chatActive", value: chat.data.chat });
         }
       });
-      setSmessageContent("");
+      setMessageContent("");
     }
   };
 
@@ -73,7 +73,7 @@ export const FooterMessages = () => {
       <InputMessage
         placeholder="Escribe un mensaje aquí"
         messageContent={messageContent}
-        setSmessageContent={setSmessageContent}
+        setMessageContent={setMessageContent}
         handleOnPress={handleOnPress}
       />
       <span className={styles.footer_message_options} onClick={sendMessage}>

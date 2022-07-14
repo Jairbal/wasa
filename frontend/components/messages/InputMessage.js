@@ -1,15 +1,15 @@
-import { useState } from "react";
 import styles from "../../styles/messages/index.module.css";
 
-export const InputMessage = ({placeholder, messageContent, setSmessageContent, handleOnPress}) => {
+export const InputMessage = ({placeholder, messageContent, name, setMessageContent, handleOnPress}) => {
   return (
     <input
       type="text"
       placeholder={placeholder}
       className={styles.footer_input}
       value={messageContent}
+      name={name}
       onKeyDown={handleOnPress}
-      onChange={(e) => setSmessageContent(e.target.value)}
+      onChange={(e) => {setMessageContent(e.target.value)}}
       autoFocus
     />
   );

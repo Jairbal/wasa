@@ -14,7 +14,7 @@ const chatsApi = require("./routes/chats.js");
 const app = express();
 const httpServer = createServer(app);
 
-
+app.use('/public', express.static(__dirname + '/public'));
 
 // body parser
 app.use(express.json());

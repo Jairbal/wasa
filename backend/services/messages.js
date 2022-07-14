@@ -8,10 +8,9 @@ class MessagesServices {
   }
 
   async createMessage({ message }) {
-    console.log(message)
     message.mess_viewed = false;
     message.mess_hourViewed = null;
-    if(!message.mess_isMedia){
+    if (!message.mess_isMedia) {
       message.mess_urlMedia = null;
     }
     const query = `INSERT INTO ${
@@ -52,22 +51,25 @@ class MessagesServices {
     }
   }
 
-  async getMessages({ mess_chat_id }) {
+  async getMessages({ mess_chat_id, owner_user_id }) {
     let messages = [];
     let notRead;
     const query = `SELECT * FROM ${
       this.table
     } WHERE mess_chat_id = ${this.pool.escape(mess_chat_id)}`;
-    const queryNR = `SELECT COUNT(mess_viewed) AS notRead FROM ${this.table} WHERE mess_viewed=false`;
+    const queryNR = `SELECT COUNT(mess_viewed) AS notRead FROM ${this.table} WHERE mess_viewed=false AND mess_user_id_sent!=${owner_user_id}`;
     try {
       const result = await this.pool.query(query);
       const rows = await this.pool.query(queryNR);
       result.forEach((fila) => {
+        fila.mess_isMedia == 0
+          ? (fila.mess_isMedia = false)
+          : (fila.mess_isMedia = true);
         messages.push(fila);
       });
       notRead = rows[0].notRead;
       notRead = parseInt(notRead);
-      return {messages, notRead};
+      return { messages, notRead };
     } catch (err) {}
   }
 }

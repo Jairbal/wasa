@@ -1,0 +1,1 @@
+export const ulrApi = "http://localhost:3001/"

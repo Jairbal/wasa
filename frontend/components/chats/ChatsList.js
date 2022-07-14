@@ -10,6 +10,7 @@ export const ChatsList = () => {
     return null;
   }
 
+
   return (
     <div className={styles.chatsList}>
       {chats.map((chat) => {

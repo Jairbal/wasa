@@ -3,10 +3,10 @@ import { DateTime } from "luxon";
 import { useAppContext } from "../../context/AppContext";
 import { InputMessage } from "./InputMessage";
 import X2Svg from "../svg/X2";
+import XSvg from "../svg/X";
 import SendSvg from "../svg/Send";
 import MoreSvg from "../svg/More";
 import styles from "../../styles/messages/index.module.css";
-import XSvg from "../svg/X";
 
 export const PreviewSendImage = () => {
   const { dispatch, state } = useAppContext();
@@ -20,22 +20,50 @@ export const PreviewSendImage = () => {
   const inputFile = useRef(null);
 
   const [previews, setPreviews] = useState([]);
-  const [messageContent, setSmessageContent] = useState("");
-  const [selectedIndexImage, setSelectedIndexImage] = useState(0);
+  const [messagesContent, setMessagesContent] = useState([]);
+  const [selectedMessageContent, setSelectedMessageContent] = useState("");
+  const [selectedIndex, setSelectedIndex] = useState(0);
 
   const handleClose = () => {
     dispatch({ type: "Attach_images", value: null });
   };
 
+  const handleSetMessageContent = (value) => {
+    setSelectedMessageContent(value);
+    const aux = messagesContent;
+    aux[selectedIndex] = selectedMessageContent;
+    setMessagesContent(aux);
+  };
+
+  // inicializacion de valores de los inputs de cada imagen
+  useEffect(() => {
+    let initial = [];
+    images.forEach(() => {
+      initial.push("");
+    });
+    setMessagesContent(initial);
+  }, []);
+
   const handleSelected = (index) => {
-    setSelectedIndexImage(index);
+    const aux = messagesContent;
+    aux[selectedIndex] = selectedMessageContent;
+    setMessagesContent(aux);
+    setSelectedMessageContent(messagesContent[index]);
+    setSelectedIndex(index);
   };
 
   const handleDeleteImage = (index) => {
+    URL.revokeObjectURL(previews[index].preview);
     dispatch({
       type: "Attach_delete_images",
       value: index,
     });
+    setSelectedIndex(0);
+    const aux = messagesContent;
+    console.log("aux antes", aux);
+    aux.splice(index, 1);
+    console.log("aux despues", aux);
+    setMessagesContent(aux);
   };
 
   const handleAddImages = () => {
@@ -46,29 +74,23 @@ export const PreviewSendImage = () => {
     if (!e.target.files || e.target.files.length === 0) {
       return;
     }
+    const aux = messagesContent;
+    aux.push("");
+    setMessagesContent(aux);
     dispatch({
       type: "Attach_add_images",
       value: Array.from(e.target.files),
     });
   };
 
-  useEffect(() => {
-    const mappedImages = images.map((image) => ({
-      ...image,
-      preview: URL.createObjectURL(image),
-    }));
-
-    setPreviews(mappedImages);
-    return () => {
-      mappedImages.forEach((image) => URL.revokeObjectURL(image.preview));
-    };
-  }, [images]);
-
   const sendMessage = () => {
+    const aux = messagesContent;
+    aux[selectedIndex] = selectedMessageContent;
+    setMessagesContent(aux);
     for (let i = 0; i < images.length; i++) {
       const message = {
         image: { buff: images[i], type: images[i].type },
-        mess_message: messageContent,
+        mess_message: messagesContent[i],
         mess_hourSend: DateTime.now().toString(),
         mess_isMedia: true,
         mess_chat_id: chatActive.chat.chat_id,
@@ -101,6 +123,18 @@ export const PreviewSendImage = () => {
     }
   };
 
+  useEffect(() => {
+    const mappedImages = images.map((image) => ({
+      ...image,
+      preview: URL.createObjectURL(image),
+    }));
+
+    setPreviews(mappedImages);
+    return () => {
+      mappedImages.forEach((image) => URL.revokeObjectURL(image.preview));
+    };
+  }, [images]);
+
   return (
     <div className={styles.PSI}>
       <div className={styles.PSI_options}>
@@ -110,18 +144,19 @@ export const PreviewSendImage = () => {
       </div>
       <div className={styles.PSI_body}>
         <img
-          src={previews[selectedIndexImage]?.preview}
+          src={previews[selectedIndex]?.preview}
           className={styles.PSI_body_image}
         />
       </div>
       <div className={styles.PSI_message}>
         <InputMessage
           placeholder="Escribe un mensaje aquí"
-          messageContent={messageContent}
-          setSmessageContent={setSmessageContent}
+          messageContent={selectedMessageContent}
+          setMessageContent={handleSetMessageContent}
           handleOnPress={handleOnPress}
         />
       </div>
+
       <div className={styles.PSI_footer}>
         <div className={styles.PSI_footer_images}>
           {previews.map((prev, index) => (
@@ -138,7 +173,7 @@ export const PreviewSendImage = () => {
               <img
                 src={prev.preview}
                 className={`${styles.PSI_footer_preview_image} ${
-                  index === selectedIndexImage &&
+                  index === selectedIndex &&
                   styles.PSI_footer_preview_image_selected
                 }`}
               />
