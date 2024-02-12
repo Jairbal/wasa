@@ -53,7 +53,7 @@ export const Contact = ({ contact, type, lastMesagge, notRead }) => {
           src={contact.user_urlPhoto}
           width={49}
           height={49}
-          style={{ borderRadius: 100 }}
+          style={{ borderRadius: 50 }}
         />
       </div>
       <div className={styles.chat_body}>

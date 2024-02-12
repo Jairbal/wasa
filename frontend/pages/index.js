@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import axios from "axios";
 import { io } from "socket.io-client";
 import { useAppContext } from "../context/AppContext";
@@ -14,6 +14,7 @@ import { Profile } from "../components/profile";
 import styles from "../styles/Home.module.css";
 
 export default function Home(props) {
+  console.log({props})
   const { state, dispatch } = useAppContext();
   const {
     user,
@@ -24,6 +25,7 @@ export default function Home(props) {
     showNewChat,
     showProfile,
     chats,
+    socket,
   } = state;
 
   useEffect(() => {
@@ -43,30 +45,35 @@ export default function Home(props) {
       });
       dispatch({ type: "socket", value: socket });
       socket.emit("online");
+    }
+  }, [user]);
 
+  useEffect(() => {
+    if (socket) {
       socket.on("message:receive", async (data) => {
         // si es nuevo chat, cargar el chat completo
-        const existedChat = chats.find(chat => chat.chat.chat_id === data.message.mess_chat_id);
-        if(existedChat) {
+        const existedChat = chats.find(
+          (chat) => chat.chat.chat_id === data.message.mess_chat_id
+        );
+        if (existedChat) {
           dispatch({ type: "message_receive", value: data.message });
         } else {
           const chat = await axios({
             url: `api/chats/${data.message.mess_chat_id}`,
-          method: "GET",
+            method: "GET",
           });
-          dispatch({type: "chat_new", value: chat.data.chat})
+          dispatch({ type: "chat_new", value: chat.data.chat });
         }
       });
 
       socket.on("message:viewed", (data) => {
-        console.log("se ha visto el mensaje", data)
         dispatch({
           type: "viewed_message",
           value: data,
         });
       });
     }
-  }, [user]);
+  }, [socket, chats]);
 
   return (
     <>

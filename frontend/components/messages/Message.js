@@ -61,6 +61,9 @@ export const Message = ({ message, isFirst }) => {
               ? styles.radius_left
               : styles.radius_complete
           }`}
+          style={{
+            maxWidth: message.mess_isMedia ? 330 : 510,
+          }}
           ref={messageRef}
         >
           {message.mess_isMedia && (
@@ -69,11 +72,13 @@ export const Message = ({ message, isFirst }) => {
                 className={styles.message_content_media_img}
                 src={ulrApi + message.mess_urlMedia}
               />
-              <div className={styles.message_content_text_shadow}></div>
+              {message.mess_message.length === 0 && (
+                <div className={styles.message_content_shadow}></div>
+              )}
             </div>
           )}
           {message.mess_message.length > 0 && (
-            <div>
+            <div className={styles.message_content_container}>
               <p className={styles.message_content_text}>
                 {message.mess_message}
               </p>
