@@ -40,6 +40,7 @@ function socketApi(httpServer) {
         console.log("se recibio un mensaje", message.mess_hourSend);
         // se registra el mensaje en la base de datos
 
+        // si el mensaje contiene archivos multimedia
         if (message.mess_isMedia) {
           const sinceType = message.image.type.lastIndexOf("/") + 1;
           const untilType = message.image.type.length;
@@ -52,6 +53,8 @@ function socketApi(httpServer) {
             if (err) throw err;
           });
         }
+
+        // si el mensaje no contiene archivos multimedia
         const newMessage = await messagesServices.createMessage({
           message,
         });

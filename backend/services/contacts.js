@@ -80,8 +80,9 @@ class ContactsService {
         cont_displayName
       )}, ${this.pool.escape(cont_owner_user_id)}, ${this.pool.escape(
         cont_user_id
-      )}) RETURNING cont_id`;
+      )})`;
       const result = await this.pool.query(query);
+      console.log({result})
       const { cont_id } = result[0];
       const contactCreated = await this.getContact({ cont_id });
       return contactCreated;
